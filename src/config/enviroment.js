@@ -1,6 +1,5 @@
 import dotenv from 'dotenv'
 
-//The values ​​from the .env file are loaded into the global variable process.env
 dotenv.config()
 
 const ENVIROMENT = {
@@ -15,7 +14,8 @@ const ENVIROMENT = {
         HOST: process.env.MYSQL_HOST,
         DB_NAME: process.env.MYSQL_DB_NAME,
         USERNAME: process.env.MYSQL_USERNAME
-    }
+    },
+    API_KEY: process.env.API_KEY
 }
 
 export default ENVIROMENT

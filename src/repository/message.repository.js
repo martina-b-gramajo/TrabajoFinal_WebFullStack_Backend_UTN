@@ -1,5 +1,4 @@
 import pool from '../config/mysql.config.js'
-import Message from '../models/Message.model.js'
 
 class MessageRepository {
     async createMessage({ sender_user_id, channel_id, content }) {

@@ -1,28 +1,11 @@
 import jwt from 'jsonwebtoken'
 import ENVIROMENT from '../config/enviroment.js'
-import User from '../models/User.model.js'
 import { sendMail } from '../utils/mail.util.js'
 import bcrypt from 'bcrypt'
 import UserRepository from '../repository/user.repository.js'
 
 const QUERY = {
     VERIFICATION_TOKEN: 'verification_token'
-}
-
-const findUserByEmail = async (email) => {
-    const userFound = await User.findOne({ email: email })
-    return userFound
-}
-
-const createUser = async ({ username, email, password, verificationToken }) => {
-    const new_user = new User({
-        username,
-        email,
-        password,
-        verificationToken,
-        modifiedAt: null
-    })
-    return new_user.save()
 }
 
 export const registerController = async (request, response) => {
@@ -243,7 +226,7 @@ export const resetPasswordController = async (req, res) => {
         const password_hash = await bcrypt.hash(password, 10)
 
         user_found.password = password_hash
-        await user_found.save()
+        await UserRepository.updateUserPassword(user_found._id, password_hash);
         return res.json({
             ok: true,
             status: 200,
@@ -258,4 +241,4 @@ export const resetPasswordController = async (req, res) => {
             status: 500,
         })
     }
-}  
+} 
