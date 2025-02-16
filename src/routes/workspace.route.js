@@ -4,7 +4,7 @@ import { createWorkspaceController, getWorkspacesController, inviteUserToWorkspa
 
 const workspaceRouter = express.Router()
 
-workspaceRouter.post("/", authMiddleware, createWorkspaceController)
+workspaceRouter.post('/', authMiddleware, createWorkspaceController)
 workspaceRouter.post('/:workspace_id/invite', authMiddleware, inviteUserToWorkspaceController)
 workspaceRouter.get('/', authMiddleware, getWorkspacesController)
 

@@ -10,7 +10,6 @@ const QUERY = {
 
 export const registerController = async (request, response) => {
     try {
-        console.log(request.body)
         const { username, email, password } = request.body
 
         //validamos estos datos (Queda de tarea)
@@ -42,7 +41,7 @@ export const registerController = async (request, response) => {
         )
 
         const password_hash = await bcrypt.hash(password, 10)
-        const new_user = await UserRepository.createUser({ username, email, password: password_hash, verificationToken })
+        await UserRepository.createUser({ username, email, password: password_hash, verificationToken })
         response.json({
             ok: true,
             status: 201,
@@ -225,8 +224,7 @@ export const resetPasswordController = async (req, res) => {
         const user_found = await UserRepository.findUserByEmail(email)
         const password_hash = await bcrypt.hash(password, 10)
 
-        user_found.password = password_hash
-        await UserRepository.updateUserPassword(user_found._id, password_hash);
+        await UserRepository.updateUserPassword(user_found._id, password_hash)
         return res.json({
             ok: true,
             status: 200,

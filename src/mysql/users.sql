@@ -7,4 +7,5 @@ CREATE TABLE USERS (
     verification_token VARCHAR(255),
     modifiedAt TIMESTAMP DEFAULT NULL,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    profile-img TEXT
 )
