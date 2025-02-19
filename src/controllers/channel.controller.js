@@ -70,7 +70,6 @@ export const sendMessageController = async (req, res) => {
                 status: 404
             })
         }
-        //Si en el futuro desear que cada canal tenga miembros, entonces deben checkearlo aqui
         const new_message = await MessageRepository.createMessage({
             sender_user_id: id,
             content,

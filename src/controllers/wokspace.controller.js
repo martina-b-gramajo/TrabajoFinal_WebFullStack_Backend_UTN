@@ -1,6 +1,7 @@
 import WorkspaceRepository from '../repository/workspaces.repository.js'
 import UserRepository from '../repository/user.repository.js'
 import { ServerError } from '../utils/errors.util.js'
+import ChannelRepository from '../repository/channel.repository.js'
 
 export const createWorkspaceController = async (req, res) => {
     try {
@@ -12,12 +13,20 @@ export const createWorkspaceController = async (req, res) => {
                 id
             }
         )
+
+        const main_channel_name = "General" 
+        const main_channel = await ChannelRepository.createChannel(id, {
+            name: main_channel_name,
+            workspace_id: new_workspace._id
+        })
+
         res.json({
             ok: true,
             message: 'Workspace created',
             status: 201,
             data: {
-                new_workspace
+                new_workspace,
+                main_channel
             }
         })
     }
